@@ -1,0 +1,31 @@
+{
+  "name": "download-repos",
+  "version": "1.0.0",
+  "description": "A Node.js application to download repositories from GitHub.",
+  "bin": "index.js",
+  "scripts": {
+    "build": "pkg . --out-path build --no-bytecode",
+    "clear": "rimraf build"
+  },
+  "keywords": [
+    "nodejs",
+    "github",
+    "repository",
+    "download",
+    "cli",
+    "pkg"
+  ],
+  "author": "Tuan Duc Tran",
+  "license": "MIT",
+  "pkg": {
+    "targets": [
+      "node18-linux-x64",
+      "node18-macos-x64",
+      "node18-win-x64"
+    ]
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "rimraf": "^5.0.7"
+  }
+}
