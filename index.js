@@ -10,7 +10,7 @@ const PAGE = 1
 const SLEEP_TIME = 5000 // milliseconds
 const RATE_LIMIT_THRESHOLD = 10 // The remaining number of requests before a long break
 
-const jsonDir = path.join(os.tmpdir(), 'json')
+const jsonDir = path.join(process.cwd(), 'json')
 
 if (!fs.existsSync(jsonDir)) {
   fs.mkdirSync(jsonDir, { recursive: true })
