@@ -1,6 +1,6 @@
-# download-repos
+# Download Your Starred GitHub Repositories
 
-A Node.js application to download repositories from GitHub.
+This project provides a Node.js application to easily download all your starred repositories from GitHub.
 
 **[100+ Github Starred Repositories](https://drive.google.com/drive/folders/189uUYB32jQZXWE4XimU55i7vPB-WcD7v)**
 
