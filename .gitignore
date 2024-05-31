@@ -1,5 +1,9 @@
 node_modules
 json
+logs
+temp
+*.sh
+starred.mjs
 .env
 build
 .DS_Store

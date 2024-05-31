@@ -39,14 +39,12 @@ Before running the application, you need to configure it by setting up the envir
 
 - `GITHUB_TOKEN`: Your GitHub personal access token.
 - `GITHUB_USERNAME`: Your GitHub username.
-- `GITHUB_LAST_PAGE`: The last page number of your starred repositories to download.
 
 You can use the provided `.env.example` file as a template:
 
 ```env
 GITHUB_TOKEN=your_github_token
 GITHUB_USERNAME=your_github_username
-GITHUB_LAST_PAGE=last_page_number
 ```
 
 Copy the contents of .env.example to .env and replace the placeholders with your actual values.
@@ -56,7 +54,7 @@ Copy the contents of .env.example to .env and replace the placeholders with your
 This is a CLI application. You can run the application using the following command:
 
 ```sh
-node index.js
+node index.mjs
 ```
 
 Alternatively, if you have built the application using pkg, you can run the built executable:

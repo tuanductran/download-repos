@@ -2,7 +2,7 @@
   "name": "download-repos",
   "version": "1.0.0",
   "description": "A Node.js application to download repositories from GitHub.",
-  "bin": "index.js",
+  "bin": "index.mjs",
   "scripts": {
     "build": "pkg . --out-path build --no-bytecode",
     "clear": "rimraf build"
@@ -26,6 +26,8 @@
   },
   "dependencies": {
     "dotenv": "^16.4.5",
+    "enquirer": "^2.4.1",
+    "node-fetch": "^3.3.2",
     "rimraf": "^5.0.7"
   }
 }
