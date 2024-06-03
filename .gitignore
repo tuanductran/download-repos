@@ -2,8 +2,6 @@ node_modules
 json
 logs
 temp
-*.sh
-starred.mjs
-.env
+output
 build
 .DS_Store
