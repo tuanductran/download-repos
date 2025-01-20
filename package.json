@@ -28,6 +28,8 @@
       "node18-win-x64"
     ],
     "assets": [
+      "logs/**/*",
+      "temp/**/*",
       "json/**/*"
     ]
   },
