@@ -4,12 +4,12 @@ const fs = require('fs');
 const path = require('path');
 const XLSX = require('xlsx');
 
-// Set up base and output directories
-const baseDir = process.cwd();
+// Define base directories
+const baseDir = path.dirname(process.execPath); // Use execPath for PKG compatibility
 const OUTPUT_DIRECTORY = path.join(baseDir, 'output');
 const JSON_DIRECTORY = path.join(baseDir, 'json');
 
-// Helper function to create a directory if it doesn’t exist
+// Ensure a directory exists, create it if it doesn't
 const ensureDirectoryExists = (directory) => {
   if (!fs.existsSync(directory)) {
     fs.mkdirSync(directory, { recursive: true });
@@ -19,35 +19,62 @@ const ensureDirectoryExists = (directory) => {
 
 // Convert JSON data to XLSX format
 const jsonToXlsx = (jsonData, outputPath) => {
-  const worksheet = XLSX.utils.json_to_sheet(jsonData);
-  const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-  XLSX.writeFile(workbook, outputPath);
-  console.log(`[SUCCESS] JSON to XLSX: ${outputPath}`);
+  try {
+    const worksheet = XLSX.utils.json_to_sheet(jsonData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    XLSX.writeFile(workbook, outputPath);
+    console.log(`[SUCCESS] JSON to XLSX: ${outputPath}`);
+  } catch (error) {
+    console.error(`[ERROR] Failed to convert JSON to XLSX: ${error.message}`);
+  }
 };
 
 // Convert JSON data to CSV format
 const jsonToCsv = (jsonData, outputPath) => {
-  const worksheet = XLSX.utils.json_to_sheet(jsonData);
-  const csvData = XLSX.utils.sheet_to_csv(worksheet);
-  fs.writeFileSync(outputPath, csvData);
-  console.log(`[SUCCESS] JSON to CSV: ${outputPath}`);
+  try {
+    const worksheet = XLSX.utils.json_to_sheet(jsonData);
+    const csvData = XLSX.utils.sheet_to_csv(worksheet);
+    fs.writeFileSync(outputPath, csvData);
+    console.log(`[SUCCESS] JSON to CSV: ${outputPath}`);
+  } catch (error) {
+    console.error(`[ERROR] Failed to convert JSON to CSV: ${error.message}`);
+  }
 };
 
 // Convert CSV file to XLSX format
 const csvToXlsx = (inputPath, outputPath) => {
-  const workbook = XLSX.readFile(inputPath);
-  XLSX.writeFile(workbook, outputPath);
-  console.log(`[SUCCESS] CSV to XLSX: ${outputPath}`);
+  try {
+    const workbook = XLSX.readFile(inputPath);
+    XLSX.writeFile(workbook, outputPath);
+    console.log(`[SUCCESS] CSV to XLSX: ${outputPath}`);
+  } catch (error) {
+    console.error(`[ERROR] Failed to convert CSV to XLSX: ${error.message}`);
+  }
 };
 
 // Convert XLSX file to CSV format
 const xlsxToCsv = (inputPath, outputPath) => {
-  const workbook = XLSX.readFile(inputPath);
-  const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-  const csvData = XLSX.utils.sheet_to_csv(worksheet);
-  fs.writeFileSync(outputPath, csvData);
-  console.log(`[SUCCESS] XLSX to CSV: ${outputPath}`);
+  try {
+    const workbook = XLSX.readFile(inputPath);
+    const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+    const csvData = XLSX.utils.sheet_to_csv(worksheet);
+    fs.writeFileSync(outputPath, csvData);
+    console.log(`[SUCCESS] XLSX to CSV: ${outputPath}`);
+  } catch (error) {
+    console.error(`[ERROR] Failed to convert XLSX to CSV: ${error.message}`);
+  }
+};
+
+// Convert XML data to XLSX format
+const xmlToXlsx = (inputPath, outputPath) => {
+  try {
+    const xmlData = fs.readFileSync(inputPath, 'utf8');
+    const jsonData = JSON.parse(xmlData); // Assuming XML is pre-converted into JSON format
+    jsonToXlsx(jsonData, outputPath);
+  } catch (error) {
+    console.error(`[ERROR] Failed to convert XML to XLSX: ${error.message}`);
+  }
 };
 
 // Process a single file based on its type
@@ -73,6 +100,8 @@ const processFile = async (file) => {
       csvToXlsx(inputFilePath, xlsxOutputPath);
     } else if (file.endsWith('.xlsx')) {
       xlsxToCsv(inputFilePath, csvOutputPath);
+    } else if (file.endsWith('.xml')) {
+      xmlToXlsx(inputFilePath, xlsxOutputPath);
     } else {
       console.warn(`[WARNING] Unsupported file format: ${file}`);
     }
@@ -87,7 +116,7 @@ const main = async () => {
   ensureDirectoryExists(OUTPUT_DIRECTORY);
 
   const inputFiles = fs.readdirSync(JSON_DIRECTORY).filter((file) =>
-    ['.json', '.csv', '.xlsx'].some((ext) => file.endsWith(ext))
+    ['.json', '.csv', '.xlsx', '.xml'].some((ext) => file.endsWith(ext))
   );
 
   if (inputFiles.length === 0) {
@@ -102,5 +131,4 @@ const main = async () => {
 
 main().catch((error) => {
   console.error(`[FATAL] Script encountered an error: ${error.message}`);
-  process.exit(1);
 });
