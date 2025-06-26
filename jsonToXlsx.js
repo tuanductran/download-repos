@@ -17,28 +17,25 @@ const ensureDirectoryExists = (directory) => {
   }
 };
 
-// Convert JSON data to XLSX format
-const jsonToXlsx = (jsonData, outputPath) => {
+// Convert JSON data to desired format (XLSX or CSV)
+const convertData = (data, format, outputPath) => {
   try {
-    const worksheet = XLSX.utils.json_to_sheet(jsonData);
+    const worksheet = XLSX.utils.json_to_sheet(data);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-    XLSX.writeFile(workbook, outputPath);
-    console.log(`[SUCCESS] JSON to XLSX: ${outputPath}`);
-  } catch (error) {
-    console.error(`[ERROR] Failed to convert JSON to XLSX: ${error.message}`);
-  }
-};
 
-// Convert JSON data to CSV format
-const jsonToCsv = (jsonData, outputPath) => {
-  try {
-    const worksheet = XLSX.utils.json_to_sheet(jsonData);
-    const csvData = XLSX.utils.sheet_to_csv(worksheet);
-    fs.writeFileSync(outputPath, csvData);
-    console.log(`[SUCCESS] JSON to CSV: ${outputPath}`);
+    if (format === 'xlsx') {
+      XLSX.writeFile(workbook, outputPath);
+      console.log(`[SUCCESS] JSON to XLSX: ${outputPath}`);
+    } else if (format === 'csv') {
+      const csvData = XLSX.utils.sheet_to_csv(worksheet);
+      fs.writeFileSync(outputPath, csvData);
+      console.log(`[SUCCESS] JSON to CSV: ${outputPath}`);
+    } else {
+      throw new Error('Unsupported format');
+    }
   } catch (error) {
-    console.error(`[ERROR] Failed to convert JSON to CSV: ${error.message}`);
+    console.error(`[ERROR] Failed to convert data: ${error.message}`);
   }
 };
 
@@ -66,17 +63,6 @@ const xlsxToCsv = (inputPath, outputPath) => {
   }
 };
 
-// Convert XML data to XLSX format
-const xmlToXlsx = (inputPath, outputPath) => {
-  try {
-    const xmlData = fs.readFileSync(inputPath, 'utf8');
-    const jsonData = JSON.parse(xmlData); // Assuming XML is pre-converted into JSON format
-    jsonToXlsx(jsonData, outputPath);
-  } catch (error) {
-    console.error(`[ERROR] Failed to convert XML to XLSX: ${error.message}`);
-  }
-};
-
 // Process a single file based on its type
 const processFile = async (file) => {
   const inputFilePath = path.join(JSON_DIRECTORY, file);
@@ -94,14 +80,12 @@ const processFile = async (file) => {
   try {
     if (file.endsWith('.json')) {
       const jsonData = JSON.parse(fs.readFileSync(inputFilePath, 'utf8'));
-      jsonToXlsx(jsonData, xlsxOutputPath);
-      jsonToCsv(jsonData, csvOutputPath);
+      convertData(jsonData, 'xlsx', xlsxOutputPath);
+      convertData(jsonData, 'csv', csvOutputPath);
     } else if (file.endsWith('.csv')) {
       csvToXlsx(inputFilePath, xlsxOutputPath);
     } else if (file.endsWith('.xlsx')) {
       xlsxToCsv(inputFilePath, csvOutputPath);
-    } else if (file.endsWith('.xml')) {
-      xmlToXlsx(inputFilePath, xlsxOutputPath);
     } else {
       console.warn(`[WARNING] Unsupported file format: ${file}`);
     }
@@ -116,7 +100,7 @@ const main = async () => {
   ensureDirectoryExists(OUTPUT_DIRECTORY);
 
   const inputFiles = fs.readdirSync(JSON_DIRECTORY).filter((file) =>
-    ['.json', '.csv', '.xlsx', '.xml'].some((ext) => file.endsWith(ext))
+    ['.json', '.csv', '.xlsx'].some((ext) => file.endsWith(ext))
   );
 
   if (inputFiles.length === 0) {
