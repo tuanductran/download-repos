@@ -31,6 +31,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'pnpm'
+        registry-url: 'https://npm.pkg.github.com'
 
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
@@ -74,6 +75,7 @@ jobs:
       with:
         node-version: '24.x'
         cache: 'pnpm'
+        registry-url: 'https://npm.pkg.github.com'
 
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
