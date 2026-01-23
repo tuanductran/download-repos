@@ -5,3 +5,7 @@ temp
 output
 build
 .DS_Store
+coverage
+*.log
+.env
+dist
