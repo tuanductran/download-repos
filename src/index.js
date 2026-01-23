@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 const path = require('path');
-const Logger = require('./src/utils/logger');
-const FileUtils = require('./src/utils/file-utils');
-const ValidationUtils = require('./src/utils/validation');
-const GitHubAPI = require('./src/modules/github-api');
+const Logger = require('./utils/logger');
+const FileUtils = require('./utils/file-utils');
+const ValidationUtils = require('./utils/validation');
+const GitHubAPI = require('./modules/github-api');
 
 // Base paths
 const baseDir = process.cwd();

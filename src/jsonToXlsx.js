@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 const path = require('path');
-const FileUtils = require('./src/utils/file-utils');
-const Logger = require('./src/utils/logger');
-const FileConverter = require('./src/modules/file-converter');
+const FileUtils = require('./utils/file-utils');
+const Logger = require('./utils/logger');
+const FileConverter = require('./modules/file-converter');
 
 // Define base directories
-const baseDir = path.dirname(process.execPath); // Use execPath for PKG compatibility
+const baseDir = process.cwd(); // Use current working directory
 const OUTPUT_DIRECTORY = path.join(baseDir, 'output');
 const JSON_DIRECTORY = path.join(baseDir, 'json');
 const LOG_DIR = path.join(baseDir, 'logs');
