@@ -25,7 +25,7 @@ git clone https://github.com/tuanductran/download-repos.git
 cd download-repos
 
 # Install dependencies
-npm install
+pnpm install
 ```
 
 ## Usage
@@ -77,33 +77,33 @@ download-repos/
 
 ```bash
 # Run all tests
-npm test
+pnpm test
 
 # Run tests in watch mode
-npm run test:watch
+pnpm run test:watch
 
 # Run tests with coverage
-npm run test:coverage
+pnpm run test:coverage
 ```
 
 ### Linting
 
 ```bash
 # Check code style
-npm run lint
+pnpm run lint
 
 # Fix linting issues automatically
-npm run lint:fix
+pnpm run lint:fix
 ```
 
 ### Build
 
 ```bash
 # Build executable binaries
-npm run build
+pnpm run build
 
 # Clean build artifacts
-npm run clear
+pnpm run clear
 ```
 
 ## Technologies
