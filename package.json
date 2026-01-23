@@ -4,6 +4,7 @@
   "description": "A Node.js application to download repositories from GitHub.",
   "main": "index.js",
   "bin": "index.js",
+  "packageManager": "pnpm@10.28.1",
   "scripts": {
     "build": "pkg . --out-path build --no-bytecode",
     "clear": "rimraf build",
