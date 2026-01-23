@@ -17,7 +17,11 @@ describe('FileConverter', () => {
 
     // Clean up before each test
     if (fs.existsSync(testDir)) {
-      fs.rmSync(testDir, { recursive: true, force: true });
+      try {
+        fs.rmSync(testDir, { recursive: true });
+      } catch (err) {
+        console.warn('Failed to clean up test directory:', err.message);
+      }
     }
     fs.mkdirSync(testDir, { recursive: true });
   });
@@ -25,7 +29,11 @@ describe('FileConverter', () => {
   afterEach(() => {
     // Clean up after each test
     if (fs.existsSync(testDir)) {
-      fs.rmSync(testDir, { recursive: true, force: true });
+      try {
+        fs.rmSync(testDir, { recursive: true });
+      } catch (err) {
+        console.warn('Failed to clean up test directory:', err.message);
+      }
     }
   });
 

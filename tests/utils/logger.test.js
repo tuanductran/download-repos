@@ -10,7 +10,11 @@ describe('Logger', () => {
   beforeEach(() => {
     // Clean up before each test
     if (fs.existsSync(testLogDir)) {
-      fs.rmSync(testLogDir, { recursive: true, force: true });
+      try {
+        fs.rmSync(testLogDir, { recursive: true });
+      } catch (err) {
+        console.warn('Failed to clean up test directory:', err.message);
+      }
     }
     logger = new Logger(testLogDir, testLogFile);
   });
@@ -18,7 +22,11 @@ describe('Logger', () => {
   afterEach(() => {
     // Clean up after each test
     if (fs.existsSync(testLogDir)) {
-      fs.rmSync(testLogDir, { recursive: true, force: true });
+      try {
+        fs.rmSync(testLogDir, { recursive: true });
+      } catch (err) {
+        console.warn('Failed to clean up test directory:', err.message);
+      }
     }
   });
 

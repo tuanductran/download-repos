@@ -17,7 +17,7 @@ class GitHubAPI {
    * @returns {Promise<{data: object, headers: object}>}
    */
   async fetchData(url) {
-    const options = this.token ? { headers: { Authorization: `token ${this.token}` } } : {};
+    const options = this.token ? { headers: { Authorization: `Bearer ${this.token}` } } : {};
     return new Promise((resolve, reject) => {
       https.get(url, options, res => {
         let data = '';
