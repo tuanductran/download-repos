@@ -12,7 +12,7 @@ Thank you for your interest in contributing to this project! This document provi
    ```
 3. **Install dependencies**:
    ```bash
-   npm install
+   pnpm install
    ```
 
 ## Development Setup
@@ -20,7 +20,7 @@ Thank you for your interest in contributing to this project! This document provi
 ### Prerequisites
 
 - Node.js 18.x or higher
-- npm 9.x or higher
+- pnpm 9.x or higher
 
 ### Project Structure
 
@@ -57,23 +57,23 @@ git checkout -b fix/your-bug-fix
 
 ```bash
 # Run all tests
-npm test
+pnpm test
 
 # Run tests in watch mode
-npm run test:watch
+pnpm run test:watch
 
 # Run tests with coverage
-npm run test:coverage
+pnpm run test:coverage
 ```
 
 ### 4. Run Linter
 
 ```bash
 # Check for linting issues
-npm run lint
+pnpm run lint
 
 # Fix linting issues automatically
-npm run lint:fix
+pnpm run lint:fix
 ```
 
 ### 5. Commit Your Changes
@@ -153,8 +153,8 @@ describe('ModuleName', () => {
 Before submitting your PR, ensure:
 
 - [ ] Code follows the project's style guidelines
-- [ ] All tests pass (`npm test`)
-- [ ] Linter passes (`npm run lint`)
+- [ ] All tests pass (`pnpm test`)
+- [ ] Linter passes (`pnpm run lint`)
 - [ ] New code has test coverage
 - [ ] Documentation is updated
 - [ ] Commit messages are clear and follow conventions

@@ -4,6 +4,7 @@
   "description": "A Node.js application to download repositories from GitHub.",
   "main": "index.js",
   "bin": "index.js",
+  "packageManager": "pnpm@10.28.1",
   "scripts": {
     "build": "pkg . --out-path build --no-bytecode",
     "clear": "rimraf build",
@@ -39,8 +40,8 @@
     ]
   },
   "dependencies": {
-    "rimraf": "^6.0.0",
-    "xlsx": "npm:@e965/xlsx@^0.20.2"
+    "rimraf": "^6.1.2",
+    "xlsx": "npm:@e965/xlsx@^0.20.3"
   },
   "devDependencies": {
     "eslint": "^9.39.2",
