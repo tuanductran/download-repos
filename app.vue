@@ -40,6 +40,9 @@
                 placeholder="Enter your GitHub token"
                 :disabled="loading"
               />
+              <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                ⚠️ Your token is sent securely to the server but never stored. Keep it confidential.
+              </p>
             </div>
 
             <div class="flex gap-3">
@@ -107,7 +110,7 @@
               <template #stargazers_count-data="{ row }">
                 <div class="flex items-center gap-1">
                   <span class="text-yellow-500">⭐</span>
-                  <span>{{ row.stargazers_count }}</span>
+                  <span>{{ row.stargazers_count_formatted }}</span>
                 </div>
               </template>
 
@@ -206,9 +209,19 @@ const fetchRepositories = async () => {
   } catch (error: any) {
     console.error('Error fetching repositories:', error)
     
+    // Improved error message extraction
+    let errorMessage = 'Failed to fetch repositories'
+    if (error.data?.statusMessage) {
+      errorMessage = error.data.statusMessage
+    } else if (error.data?.message) {
+      errorMessage = error.data.message
+    } else if (error.message) {
+      errorMessage = error.message
+    }
+    
     toast.add({
       title: 'Error',
-      description: error.data?.message || error.message || 'Failed to fetch repositories',
+      description: errorMessage,
       color: 'red'
     })
   } finally {

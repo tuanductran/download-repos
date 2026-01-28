@@ -3,7 +3,8 @@ export interface Repository {
   description: string
   html_url: string
   language: string
-  stargazers_count: string
+  stargazers_count: number
+  stargazers_count_formatted: string
   created_at: string
 }
 

@@ -41,14 +41,14 @@ function convertToCSV(repositories: Repository[]): string {
       repo.description,
       repo.html_url,
       repo.language,
-      repo.stargazers_count,
+      repo.stargazers_count_formatted,
       repo.created_at
     ]
     return row.map(field => escapeCsvField(field)).join(',')
   })
   
-  // Combine header and data rows
-  return [headerRow, ...dataRows].join('\n')
+  // Combine header and data rows with CRLF line endings for Windows compatibility
+  return [headerRow, ...dataRows].join('\r\n')
 }
 
 /**

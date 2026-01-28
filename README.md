@@ -5,8 +5,6 @@ A modern Nuxt 3 web application to easily fetch and export all your starred repo
 [![CI](https://github.com/tuanductran/download-repos/workflows/CI/badge.svg)](https://github.com/tuanductran/download-repos/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**[Live Demo](https://download-repos.vercel.app)** (coming soon)
-
 ## Features
 
 - ✨ Fetch all your starred GitHub repositories via API
