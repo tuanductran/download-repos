@@ -19,22 +19,28 @@
           </template>
 
           <div class="space-y-4">
-            <UFormGroup label="GitHub Username" required>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                GitHub Username <span class="text-red-500">*</span>
+              </label>
               <UInput
                 v-model="username"
                 placeholder="Enter your GitHub username"
                 :disabled="loading"
               />
-            </UFormGroup>
+            </div>
 
-            <UFormGroup label="GitHub Personal Access Token" required>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                GitHub Personal Access Token <span class="text-red-500">*</span>
+              </label>
               <UInput
                 v-model="token"
                 type="password"
                 placeholder="Enter your GitHub token"
                 :disabled="loading"
               />
-            </UFormGroup>
+            </div>
 
             <div class="flex gap-3">
               <UButton
@@ -52,9 +58,8 @@
                 color="green"
                 variant="outline"
                 size="lg"
-                icon="i-heroicons-arrow-down-tray"
               >
-                Export to CSV
+                ⬇️ Export to CSV
               </UButton>
             </div>
           </div>
@@ -101,7 +106,7 @@
 
               <template #stargazers_count-data="{ row }">
                 <div class="flex items-center gap-1">
-                  <UIcon name="i-heroicons-star" class="text-yellow-500" />
+                  <span class="text-yellow-500">⭐</span>
                   <span>{{ row.stargazers_count }}</span>
                 </div>
               </template>
@@ -118,7 +123,7 @@
         <!-- Empty State -->
         <UCard v-else-if="!loading">
           <div class="text-center py-12">
-            <UIcon name="i-heroicons-star" class="w-16 h-16 mx-auto text-gray-400 mb-4" />
+            <div class="text-6xl mb-4">⭐</div>
             <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">
               No repositories yet
             </h3>
