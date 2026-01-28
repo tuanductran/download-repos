@@ -1,13 +1,15 @@
 {
   "name": "download-repos",
-  "version": "1.0.0",
-  "description": "A Node.js application to download repositories from GitHub.",
-  "main": "index.js",
-  "bin": "index.js",
+  "version": "2.0.0",
+  "description": "A Nuxt 3 web application to download starred GitHub repositories.",
   "packageManager": "pnpm@10.28.2",
+  "type": "module",
   "scripts": {
-    "build": "pkg . --out-path build --no-bytecode",
-    "clear": "rimraf build",
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -15,36 +17,25 @@
     "lint:fix": "eslint . --fix"
   },
   "keywords": [
-    "nodejs",
+    "nuxt",
+    "vue",
     "github",
     "repository",
     "download",
-    "json",
-    "xlsx",
     "csv",
-    "cli",
-    "pkg"
+    "web-app",
+    "typescript"
   ],
   "author": "Tuan Duc Tran",
   "license": "MIT",
-  "pkg": {
-    "targets": [
-      "node18-linux-x64",
-      "node18-macos-x64",
-      "node18-win-x64"
-    ],
-    "assets": [
-      "logs/**/*",
-      "temp/**/*",
-      "json/**/*"
-    ]
-  },
   "dependencies": {
-    "rimraf": "^6.1.2",
-    "xlsx": "npm:@e965/xlsx@^0.20.3"
+    "@nuxt/ui": "^3.0.0",
+    "nuxt": "^3.15.3"
   },
   "devDependencies": {
+    "@nuxt/eslint": "^0.7.5",
     "eslint": "^9.39.2",
-    "jest": "^30.2.0"
+    "jest": "^30.2.0",
+    "typescript": "^5.7.3"
   }
 }
