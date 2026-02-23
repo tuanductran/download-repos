@@ -44,7 +44,7 @@
     "xlsx": "npm:@e965/xlsx@^0.20.3"
   },
   "devDependencies": {
-    "eslint": "^10.0.0",
+    "eslint": "^10.0.1",
     "jest": "^30.2.0"
   }
 }
